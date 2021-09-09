@@ -26,7 +26,7 @@ requirements:
     - libuv # [win]
     - libuv # [unix]
     - pkg-config # [unix]
-{{ environ.get('MAGMA_PACKAGE', '') }}
+#{{ environ.get('MAGMA_PACKAGE', '') }}
 
   run:
     - python
