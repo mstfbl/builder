@@ -184,6 +184,7 @@ if [[ ! -d "$pytorch_rootdir" ]]; then
     git clone "https://github.com/${PYTORCH_REPO}/pytorch" "$pytorch_rootdir"
     pushd "$pytorch_rootdir"
     #git checkout "$PYTORCH_BRANCH"
+    echo "--------------------replace nccl with sccl------------------"
     git checkout tags/v1.9.0 -b v1.9.0_sccl
     conda install -c anaconda perl -y
     perl -p -i -e  's/url = https:\/\/github\.com\/NVIDIA\/nccl/url = https:\/\/github\.com\/microsoft\/sccl-rt/g' .gitmodules
@@ -191,6 +192,7 @@ if [[ ! -d "$pytorch_rootdir" ]]; then
     git submodule update --init --recursive
     git submodule update --init --recursive --remote third_party/nccl
     git apply third_party/nccl/nccl/patches/nccl.cpp.patch
+    echo "--------------------replace nccl with sccl------------------"
     popd
 fi
 pushd "$pytorch_rootdir"
