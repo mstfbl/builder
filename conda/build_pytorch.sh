@@ -422,9 +422,9 @@ for py_ver in "${DESIRED_PYTHON[@]}"; do
     fi
 
     # Clean up test folder
-    source deactivate
-    conda env remove -yn "$test_env"
-    rm -rf "$output_folder"
+    #source deactivate
+    #conda env remove -yn "$test_env"
+    #rm -rf "$output_folder"
 done
 
 # Cleanup the tricks for sccache with conda builds on Windows
