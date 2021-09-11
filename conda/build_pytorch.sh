@@ -185,7 +185,7 @@ if [[ ! -d "$pytorch_rootdir" ]]; then
     pushd "$pytorch_rootdir"
     #git checkout "$PYTORCH_BRANCH"
     echo "--------------------replace nccl with sccl------------------"
-    git checkout tags/v1.9.0 -b v1.9.0_sccl
+    git checkout tags/v1.9.0
     conda install -c anaconda perl -y
     perl -p -i -e  's/url = https:\/\/github\.com\/NVIDIA\/nccl/url = https:\/\/github\.com\/microsoft\/sccl-rt/g' .gitmodules
     git submodule sync third_party/nccl
@@ -198,7 +198,7 @@ fi
 pushd "$pytorch_rootdir"
 #git submodule update --init --recursive --jobs 0
 echo "--------------------replace nccl with sccl------------------"
-git checkout tags/v1.9.0 -b v1.9.0_sccl
+git checkout tags/v1.9.0
 conda install -c anaconda perl -y
 perl -p -i -e  's/url = https:\/\/github\.com\/NVIDIA\/nccl/url = https:\/\/github\.com\/microsoft\/sccl-rt/g' .gitmodules
 git submodule sync third_party/nccl
