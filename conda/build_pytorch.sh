@@ -388,7 +388,7 @@ for py_ver in "${DESIRED_PYTHON[@]}"; do
     conda config --set anaconda_upload no
     conda install -y conda-package-handling
 
-    ADDITIONAL_CHANNELS="pytorch"
+    ADDITIONAL_CHANNELS=""
     echo "Calling conda-build at $(date)"
     time CMAKE_ARGS=${CMAKE_ARGS[@]} \
          EXTRA_CAFFE2_CMAKE_FLAGS=${EXTRA_CAFFE2_CMAKE_FLAGS[@]} \
