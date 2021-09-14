@@ -425,19 +425,19 @@ for py_ver in "${DESIRED_PYTHON[@]}"; do
     fi
 
     # Install the built package and run tests, unless it's for mac cross compiled arm64
-    if [[ -z "$CROSS_COMPILE_ARM64" ]]; then
-        conda install -y "$built_package"
+    #if [[ -z "$CROSS_COMPILE_ARM64" ]]; then
+    #    conda install -y "$built_package"
 
-        echo "$(date) :: Running tests"
-        pushd "$pytorch_rootdir"
-        if [[ "$cpu_only" == 1 ]]; then
-            "${SOURCE_DIR}/../run_tests.sh" 'conda' "$py_ver" 'cpu'
-        else
-            "${SOURCE_DIR}/../run_tests.sh" 'conda' "$py_ver" "cu$cuda_nodot"
-        fi
-        popd
-        echo "$(date) :: Finished tests"
-    fi
+    #    echo "$(date) :: Running tests"
+    #    pushd "$pytorch_rootdir"
+    #    if [[ "$cpu_only" == 1 ]]; then
+    #        "${SOURCE_DIR}/../run_tests.sh" 'conda' "$py_ver" 'cpu'
+    #    else
+    #        "${SOURCE_DIR}/../run_tests.sh" 'conda' "$py_ver" "cu$cuda_nodot"
+    #    fi
+    #    popd
+    #    echo "$(date) :: Finished tests"
+    #fi
 
     # Clean up test folder
     #source deactivate
