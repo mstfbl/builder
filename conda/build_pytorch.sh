@@ -196,16 +196,16 @@ if [[ ! -d "$pytorch_rootdir" ]]; then
     popd
 fi
 pushd "$pytorch_rootdir"
-git submodule update --init --recursive --jobs 0
+#git submodule update --init --recursive --jobs 0
 #echo "--------------------replace nccl with sccl------------------"
 #git checkout tags/v1.9.0
-#conda install -c anaconda perl -y
-#perl -p -i -e  's/url = https:\/\/github\.com\/NVIDIA\/nccl/url = https:\/\/github\.com\/microsoft\/sccl-rt/g' .gitmodules
-#git submodule sync third_party/nccl
-#git submodule update --init --recursive
-#git submodule update --init --recursive --remote third_party/nccl
-#git apply third_party/nccl/nccl/patches/nccl.cpp.patch
-#echo "--------------------replace nccl with sccl------------------"
+conda install -c anaconda perl -y
+perl -p -i -e  's/url = https:\/\/github\.com\/NVIDIA\/nccl/url = https:\/\/github\.com\/microsoft\/sccl-rt/g' .gitmodules
+git submodule sync third_party/nccl
+git submodule update --init --recursive
+git submodule update --init --recursive --remote third_party/nccl
+git apply third_party/nccl/nccl/patches/nccl.cpp.patch
+echo "--------------------replace nccl with sccl------------------"
 echo "Using Pytorch from "
 git --no-pager log --max-count 1
 popd
