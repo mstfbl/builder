@@ -420,8 +420,11 @@ for py_ver in "${DESIRED_PYTHON[@]}"; do
 
     # Copy the built package to the host machine for persistence before testing
     if [[ -n "$PYTORCH_FINAL_PACKAGE_DIR" ]]; then
+        pwd
         mkdir -p "$PYTORCH_FINAL_PACKAGE_DIR" || true
         cp "$built_package" "$PYTORCH_FINAL_PACKAGE_DIR/"
+        ls $PYTORCH_FINAL_PACKAGE_DIR
+        realpath $PYTORCH_FINAL_PACKAGE_DIR
     fi
 
     # Install the built package and run tests, unless it's for mac cross compiled arm64
