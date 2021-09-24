@@ -326,6 +326,12 @@ if [[ "$(uname)" == 'Linux' ]]; then
     export USE_GLOO_WITH_OPENSSL=1
 fi
 
+if [[ -n "$SKIP_TEST" ]]; then
+    skip_test=1
+else
+    skip_test=0
+fi
+
 # Loop through all Python versions to build a package for each
 for py_ver in "${DESIRED_PYTHON[@]}"; do
     build_string="py${py_ver}_${build_string_suffix}"
@@ -397,7 +403,7 @@ for py_ver in "${DESIRED_PYTHON[@]}"; do
     fi
 
     # Install the built package and run tests, unless it's for mac cross compiled arm64
-    if [[ -z "$CROSS_COMPILE_ARM64" ]]; then
+    if [[ -z "$CROSS_COMPILE_ARM64" && "$skip_test" == 0 ]]; then
         conda install -y "$built_package"
 
         echo "$(date) :: Running tests"
