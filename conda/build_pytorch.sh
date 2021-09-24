@@ -327,7 +327,7 @@ if [[ "$(uname)" == 'Linux' ]]; then
 fi
 
 if [[ -n "$SKIP_TEST" ]]; then
-    skip_test=1
+    skip_test="$SKIP_TEST"
 else
     skip_test=0
 fi
