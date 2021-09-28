@@ -159,6 +159,12 @@ if [[ "$OSTYPE" == "msys" && -z "$WIN_PACKAGE_WORK_DIR" ]]; then
     WIN_PACKAGE_WORK_DIR="$(echo $(pwd -W) | tr '/' '\\')\\tmp_conda_${DESIRED_PYTHON}_$(date +%H%M%S)"
 fi
 
+if [[ -n "$SKIP_CHECKOUT_SUBMODULE" ]]; then
+    skip_checkout_submodule="$SKIP_CHECKOUT_SUBMODULE"
+else
+    skip_checkout_submodule=0
+fi
+
 # Clone the Pytorch repo
 ###########################################################
 if [[ "$(uname)" == 'Darwin' ]]; then
@@ -187,7 +193,9 @@ if [[ ! -d "$pytorch_rootdir" ]]; then
     popd
 fi
 pushd "$pytorch_rootdir"
-git submodule update --init --recursive --jobs 0
+if [[ "$skip_checkout_submodule" == 0 ]]; then
+    git submodule update --init --recursive --jobs 0
+fi
 echo "Using Pytorch from "
 git --no-pager log --max-count 1
 popd
