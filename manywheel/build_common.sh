@@ -100,7 +100,15 @@ if [[ ! -d "$pytorch_rootdir" ]]; then
 else
     pushd $pytorch_rootdir
 fi
-git submodule update --init --recursive --jobs 0
+if [[ -n "$SKIP_CHECKOUT_SUBMODULE" ]]; then
+    skip_checkout_submodule="$SKIP_CHECKOUT_SUBMODULE"
+else
+    skip_checkout_submodule=0
+fi
+
+if [[ "$skip_checkout_submodule" == 0 ]]; then
+    git submodule update --init --recursive --jobs 0
+fi
 
 export PATCHELF_BIN=/usr/local/bin/patchelf
 patchelf_version=`$PATCHELF_BIN --version`
