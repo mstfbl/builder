@@ -107,7 +107,7 @@ else
 fi
 
 if [[ "$skip_checkout_submodule" == 0 ]]; then
-    git submodule update --init --recursive --jobs 0
+    git submodule update --init --recursive
 fi
 
 export PATCHELF_BIN=/usr/local/bin/patchelf
