@@ -30,10 +30,6 @@ if [[ "$OS_NAME" == *"CentOS Linux"* ]]; then
     source /etc/profile.d/modules.sh
     export OMPI_MCA_opal_cuda_support=true
     module load mpi
-    python -m pip install mpi4py
-    # Test OpenMPI installation
-    mpiexec --allow-run-as-root -n 5 python -m mpi4py.bench helloworld
-
 elif [[ "$OS_NAME" == *"Ubuntu"* ]]; then
     retry apt-get update
     retry apt-get -y install zip openssl
@@ -136,6 +132,10 @@ case ${DESIRED_PYTHON} in
     retry pip install -q numpy==1.19.4
     ;;
 esac
+# Install mpi4py (OpenMPI Python package)
+python -m pip install mpi4py
+# Test OpenMPI & mpi4py installation
+mpiexec --allow-run-as-root -n 5 python -m mpi4py.bench helloworld
 
 if [[ "$DESIRED_DEVTOOLSET" == *"cxx11-abi"* ]]; then
     export _GLIBCXX_USE_CXX11_ABI=1
