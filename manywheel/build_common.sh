@@ -25,6 +25,15 @@ retry () {
 OS_NAME=`awk -F= '/^NAME/{print $2}' /etc/os-release`
 if [[ "$OS_NAME" == *"CentOS Linux"* ]]; then
     retry yum install -q -y zip openssl
+    # Install OpenMPI
+    yum install openmpi-devel -y
+    source /etc/profile.d/modules.sh
+    export OMPI_MCA_opal_cuda_support=true
+    module load mpi
+    python -m pip install mpi4py
+    # Test OpenMPI installation
+    mpiexec --allow-run-as-root -n 5 python -m mpi4py.bench helloworld
+
 elif [[ "$OS_NAME" == *"Ubuntu"* ]]; then
     retry apt-get update
     retry apt-get -y install zip openssl
